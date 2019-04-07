@@ -273,12 +273,12 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
     # -----
 
     def distributeXSpacing(self, sender):
-        self._distributeSpacing(0)
+        self._distributeSpacing(0, "Distribute Horizontal Spacing")
 
     def distributeYSpacing(self, sender):
-        self._distributeSpacing(1)
+        self._distributeSpacing(1, "Distribute Vertical Spacing")
 
-    def _distributeSpacing(self, index):
+    def _distributeSpacing(self, index, title):
         glyph = CurrentGlyph()
         if glyph is None:
             return
