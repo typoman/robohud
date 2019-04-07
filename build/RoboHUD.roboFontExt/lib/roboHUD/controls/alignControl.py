@@ -117,19 +117,19 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
         top = getEdgeCoordinate(rects, 3, max)
         for bPoint in selectedBPoints:
             d = top - bPoint.anchor[1]
-            bPoint.move((0, d))
+            bPoint.moveBy((0, d))
         for contour in selectedContours:
             d = top - contour.bounds[3]
-            contour.move((0, d))
+            contour.moveBy((0, d))
 
     def _alignBottom(self, rects, selectedContours, selectedBPoints):
         bottom = getEdgeCoordinate(rects, 1, min)
         for bPoint in selectedBPoints:
             d = bottom - bPoint.anchor[1]
-            bPoint.move((0, d))
+            bPoint.moveBy((0, d))
         for contour in selectedContours:
             d = bottom - contour.bounds[1]
-            contour.move((0, d))
+            contour.moveBy((0, d))
 
     def _alignYCenter(self, rects, selectedContours, selectedBPoints):
         y1 = getEdgeCoordinate(rects, 1, min)
@@ -137,28 +137,28 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
         center = (y1 + y2) / 2
         for bPoint in selectedBPoints:
             d = center - bPoint.anchor[1]
-            bPoint.move((0, d))
+            bPoint.moveBy((0, d))
         for contour in selectedContours:
             d = center - rectCenter(contour.bounds)[1]
-            contour.move((0, d))
+            contour.moveBy((0, d))
 
     def _alignLeft(self, rects, selectedContours, selectedBPoints):
         left = getEdgeCoordinate(rects, 0, min)
         for bPoint in selectedBPoints:
             d = left - bPoint.anchor[0]
-            bPoint.move((d, 0))
+            bPoint.moveBy((d, 0))
         for contour in selectedContours:
             d = left - contour.bounds[0]
-            contour.move((d, 0))
+            contour.moveBy((d, 0))
 
     def _alignRight(self, rects, selectedContours, selectedBPoints):
         right = getEdgeCoordinate(rects, 2, max)
         for bPoint in selectedBPoints:
             d = right - bPoint.anchor[0]
-            bPoint.move((d, 0))
+            bPoint.moveBy((d, 0))
         for contour in selectedContours:
             d = right - contour.bounds[2]
-            contour.move((d, 0))
+            contour.moveBy((d, 0))
 
     def _alignXCenter(self, rects, selectedContours, selectedBPoints):
         x1 = getEdgeCoordinate(rects, 0, min)
@@ -166,10 +166,10 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
         center = (x1 + x2) / 2
         for bPoint in selectedBPoints:
             d = center - bPoint.anchor[0]
-            bPoint.move((d, 0))
+            bPoint.moveBy((d, 0))
         for contour in selectedContours:
             d = center - rectCenter(contour.bounds)[0]
-            contour.move((d, 0))
+            contour.moveBy((d, 0))
 
     # ----------
     # Distribute
@@ -242,9 +242,9 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
                 e = edge1 + (i * interval)
                 d = e - pos
                 if index in (0, 2):
-                    obj.move((d, 0))
+                    obj.moveBy((d, 0))
                 else:
-                    obj.move((0, d))
+                    obj.moveBy((0, d))
 
     def _distributeCenter(self, index, rects, selectedContours, selectedBPoints):
         ordered = [(bPoint.anchor[index], (bPoint.anchor[0], bPoint.anchor[1], bPoint.anchor[0], bPoint.anchor[1]), bPoint) for bPoint in selectedBPoints]
@@ -263,9 +263,9 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
             alignTo = prev + step
             d = alignTo - rectCenter(bounds)[index]
             if index == 0:
-                obj.move((d, 0))
+                obj.moveBy((d, 0))
             else:
-                obj.move((0, d))
+                obj.moveBy((0, d))
             prev = alignTo
 
     # -----
@@ -324,9 +324,9 @@ class AlignSelectionHUDControl(BaseRoboHUDControl):
             print(d)
             if d != 0:
                 if index == 0:
-                    obj.move((d, 0))
+                    obj.moveBy((d, 0))
                 else:
-                    obj.move((0, d))
+                    obj.moveBy((0, d))
             prevEdge = newPos + size
         for bPoint in selectedBPoints:
             bPoint.round()
